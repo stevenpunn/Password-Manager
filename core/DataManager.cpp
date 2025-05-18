@@ -1,4 +1,5 @@
 #include "DataManager.h"
+#include "CryptoManager.h"
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -13,6 +14,12 @@ void DataManager::loadVault(const string &path){
         return;
     }
 
+    stringstream buffer;
+    buffer << file.rdbuf();     // read the entire file
+    string encryptedData = buffer.str();
+    string decryptedData = CryptoManager::decrypt(encryptedData, masterKey);
+
+    istringstream iss(decryptedData);
     string line;
     while(getline(file, line)){
         istringstream iss(line);
@@ -25,10 +32,15 @@ void DataManager::loadVault(const string &path){
 }
 
 void DataManager::saveVault(const string &path){
-    ofstream file(path);
+    ostringstream oss;
     for (const auto &[site, user, pass] : entries) {
-        file << site << "," << user << "," << pass << "\n";
+        oss << site << "," << user << "," << pass << "\n";
     }
+    string plaintextData = oss.str();
+    string encryptedData = CryptoManager::encrypt(plaintextData, masterKey);
+
+    ofstream file(path);
+    file << encryptedData;
 }
 
 void DataManager::addEntry(const string &site, const string &username, const string &password){
