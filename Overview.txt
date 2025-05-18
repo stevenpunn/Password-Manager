@@ -1,0 +1,9 @@
+A Password Manager is a robust graphical user interface application that securely stores usernames and passwords, ensuring data encryption and decryption on demand. This project emphasizes data security by encrypting sensitive information and protecting it behind a secure wall accessed via an application password.
+
+Technologies Required
+
+C++ programming language
+GUI library
+EncryptionDecryption
+Data Structures and Algorithms
+Secured Storage
