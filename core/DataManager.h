@@ -8,11 +8,12 @@ using namespace std;
 
 class DataManager {
     public:
+    DataManager();
         explicit DataManager(const string &key);
-        void loadVault(const string &path);
-        void saveVault(const string &path);
+        bool loadVault(const string &path, const string& masterKey);
+        bool saveVault(const string &path, const string& masterKey);
         void addEntry(const string &site, const string &username, const string &password);
-        void printEntries();
+        void printEntries() const;
 
     private:
         string masterKey;

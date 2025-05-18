@@ -5,7 +5,8 @@
 
 class AuthManager{
     public:
-        static bool verifyMasterPassword(const std::string &input);
+        static std::string hashPassword(const std::string& password);
+        static bool verifyMasterPassword(const std::string &input, const std::string& hashFilePath);
 };
 
 #endif

@@ -5,6 +5,8 @@
 #include <iomanip>
 #include <vector>
 
+// Program uses an AES-256 encryption algorithm
+
 static const int KEY_LENGTH = 32;   // 256 bits
 static const int IV_LENGTH = 16;    // 128 bits
 

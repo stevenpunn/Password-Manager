@@ -8,6 +8,8 @@ using namespace std;
 
 DataManager::DataManager(const string &key) : masterKey(key) {}
 
+DataManager::DataManager(){}
+
 void DataManager::loadVault(const string &path){
     ifstream file(path);
     if(!file){
@@ -48,7 +50,12 @@ void DataManager::addEntry(const string &site, const string &username, const str
     cout << "Entry added." << endl;
 }
 
-void DataManager::printEntries(){
+void DataManager::printEntries() const{
+    if (entries.empty()){
+        cout << "No entries were found." << endl;
+        return;
+    }
+    cout << "Entries found:" << endl;
     for (const auto &[site, user, pass] : entries){
         cout << "Site: " << site << ", Username: " << user << ", Password: " << pass << endl;
     }
